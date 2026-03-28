@@ -64,9 +64,15 @@ Over 40 built-in voice commands for hands-free control:
 
 ### Option 1: Download the executable (easiest)
 
-Download `hushtype.exe` from [Releases](https://github.com/turqoisehex/hushtype/releases/latest) and run it. No Python or setup required.
+Download `hushtype.exe` from [Releases](https://github.com/turqoisehex/hushtype/releases/latest). No Python or setup required.
 
-On first run, Whisper will download the model (~1.5 GB for turbo). This is a one-time download.
+First run — download the Whisper model (~1.5 GB, one-time):
+
+```bash
+hushtype.exe --download-model
+```
+
+After that, hushtype runs fully offline. No data ever leaves your machine.
 
 ### Option 2: Install from source
 
