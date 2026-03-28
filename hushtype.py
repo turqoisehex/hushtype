@@ -16,10 +16,6 @@ import sys
 import multiprocessing
 import argparse
 
-# Prevent huggingface_hub from phoning home when models are already cached.
-# First run still downloads the model; subsequent runs are fully offline.
-os.environ.setdefault("HF_HUB_OFFLINE", "1")
-
 from RealtimeSTT import AudioToTextRecorder
 import pyautogui
 import pyaudio
@@ -506,7 +502,7 @@ def parse_args():
     )
     parser.add_argument(
         "--sensitivity", type=float, default=0.55,
-        help="VAD sensitivity 0.0-1.0 — higher = more sensitive (default: 0.55)",
+        help="VAD sensitivity 0.0-1.0, higher = more sensitive (default: 0.55)",
     )
     parser.add_argument(
         "--download-model", action="store_true",
@@ -526,9 +522,12 @@ def main():
     print("\nCommands: scratch that, delete word, select, new line,")
     print("          undo, redo, copy, paste, save, stop listening\n")
 
-    # Allow network access for model download if requested
+    # Default: offline (no phone-home). Children inherit this via env.
+    # --download-model: allow network for first-time model fetch.
     if args.download_model:
         os.environ.pop("HF_HUB_OFFLINE", None)
+    else:
+        os.environ["HF_HUB_OFFLINE"] = "1"
 
     # Apply CLI args to recorder config
     _cli_config['model'] = args.model
