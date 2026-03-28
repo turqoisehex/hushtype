@@ -64,15 +64,9 @@ Over 40 built-in voice commands for hands-free control:
 
 ### Option 1: Download the executable (easiest)
 
-Download `hushtype.exe` from [Releases](https://github.com/turqoisehex/hushtype/releases/latest). No Python or setup required.
+Download `hushtype.exe` from [Releases](https://github.com/turqoisehex/hushtype/releases/latest) and double-click to run. No Python or setup required.
 
-First run — download the Whisper model (~1.5 GB, one-time):
-
-```bash
-hushtype.exe --download-model
-```
-
-After that, hushtype runs fully offline. No data ever leaves your machine.
+On first run, the Whisper model (~1.5 GB) downloads automatically. This is a one-time download -- after that, all speech recognition runs locally on your GPU. No audio data ever leaves your machine.
 
 ### Option 2: Install from source
 
@@ -108,6 +102,8 @@ Options:
   --model MODEL        Whisper model: tiny, base, small, medium, large-v3, turbo (default: turbo)
   --silence SECONDS    Seconds of silence before finalizing speech (default: 2.5)
   --sensitivity VALUE  VAD sensitivity 0.0-1.0, higher = more sensitive (default: 0.55)
+  --offline            Disable all network access (model must already be cached)
+  --cache-dir DIR      Custom HuggingFace cache directory for Whisper models
   --version            Show version and exit
   --help               Show help and exit
 ```

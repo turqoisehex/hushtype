@@ -505,8 +505,8 @@ def parse_args():
         help="VAD sensitivity 0.0-1.0, higher = more sensitive (default: 0.55)",
     )
     parser.add_argument(
-        "--download-model", action="store_true",
-        help="Allow network access to download the Whisper model (first run only)",
+        "--offline", action="store_true",
+        help="Disable all network access (model must already be cached)",
     )
     parser.add_argument(
         "--cache-dir",
@@ -526,11 +526,9 @@ def main():
     print("\nCommands: scratch that, delete word, select, new line,")
     print("          undo, redo, copy, paste, save, stop listening\n")
 
-    # Default: offline (no phone-home). Children inherit this via env.
-    # --download-model: allow network for first-time model fetch.
-    if args.download_model:
-        os.environ.pop("HF_HUB_OFFLINE", None)
-    else:
+    # Default: online (auto-downloads model on first run).
+    # --offline: block all network access (model must already be cached).
+    if args.offline:
         os.environ["HF_HUB_OFFLINE"] = "1"
 
     # Point to custom model cache if specified
