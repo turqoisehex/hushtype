@@ -1,8 +1,8 @@
-"""hushtype — Real-time voice dictation for Windows.
+"""hushtype --Real-time voice dictation for Windows.
 
 GPU-accelerated speech-to-text using OpenAI Whisper, with voice commands,
 smart auto-spacing, terminal-aware paste, and a visual status indicator.
-Runs system-wide as an input method — dictate into any application.
+Runs system-wide as an input method --dictate into any application.
 
 Usage:
     python hushtype.py              Start dictation (Ctrl+Alt+V to toggle)
@@ -47,7 +47,7 @@ need_space_before = False  # prepend space before next text paste
 status_window = None
 status_label = None
 
-# CLI overrides — populated by parse_args(), read by create_recorder()
+# CLI overrides --populated by parse_args(), read by create_recorder()
 _cli_config = {'model': 'turbo', 'silence': 2.5, 'sensitivity': 0.55}
 
 # Known Whisper hallucination phrases (appear on silence/noise).
@@ -259,7 +259,7 @@ _MULTI_STEP = {
 }
 
 
-# Commands that don't change cursor/text state — preserve need_space_before.
+# Commands that don't change cursor/text state --preserve need_space_before.
 # "stop"/"pause" not listed: toggle() resets need_space_before on resume anyway.
 _NO_RESET_CMDS = {"copy", "copy that", "save", "save file", "save that"}
 
@@ -367,7 +367,7 @@ def toggle():
         update_status("paused")
         threading.Thread(target=lambda: winsound.Beep(440, 80), daemon=True).start()
         # Interrupt any in-progress wait_audio() so toggle is instant.
-        # Don't use abort() — it blocks on was_interrupted.wait() which
+        # Don't use abort() --it blocks on was_interrupted.wait() which
         # deadlocks if text() isn't currently running.
         if recorder:
             try:
