@@ -70,7 +70,12 @@ On first run, Whisper will download the model (~1.5 GB for turbo). This is a one
 
 ### Option 2: Install from source
 
+Requires Python 3.10+ and an NVIDIA GPU with CUDA.
+
 ```bash
+# Install PyTorch with CUDA first (check https://pytorch.org for your CUDA version)
+pip install torch torchaudio --index-url https://download.pytorch.org/whl/cu124
+
 git clone https://github.com/turqoisehex/hushtype.git
 cd hushtype
 pip install -r requirements.txt
