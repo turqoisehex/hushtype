@@ -508,6 +508,10 @@ def parse_args():
         "--download-model", action="store_true",
         help="Allow network access to download the Whisper model (first run only)",
     )
+    parser.add_argument(
+        "--cache-dir",
+        help="HuggingFace cache directory for Whisper models (default: ~/.cache/huggingface)",
+    )
     return parser.parse_args()
 
 
@@ -528,6 +532,10 @@ def main():
         os.environ.pop("HF_HUB_OFFLINE", None)
     else:
         os.environ["HF_HUB_OFFLINE"] = "1"
+
+    # Point to custom model cache if specified
+    if args.cache_dir:
+        os.environ["HF_HOME"] = args.cache_dir
 
     # Apply CLI args to recorder config
     _cli_config['model'] = args.model
