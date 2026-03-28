@@ -12,7 +12,13 @@ https://github.com/turqoisehex/hushtype
 """
 
 import os
+import sys
+import multiprocessing
 import argparse
+
+# Prevent huggingface_hub from phoning home when models are already cached.
+# First run still downloads the model; subsequent runs are fully offline.
+os.environ.setdefault("HF_HUB_OFFLINE", "1")
 
 from RealtimeSTT import AudioToTextRecorder
 import pyautogui
@@ -502,6 +508,10 @@ def parse_args():
         "--sensitivity", type=float, default=0.55,
         help="VAD sensitivity 0.0-1.0 — higher = more sensitive (default: 0.55)",
     )
+    parser.add_argument(
+        "--download-model", action="store_true",
+        help="Allow network access to download the Whisper model (first run only)",
+    )
     return parser.parse_args()
 
 
@@ -515,6 +525,10 @@ def main():
     print("Press Ctrl+C to quit")
     print("\nCommands: scratch that, delete word, select, new line,")
     print("          undo, redo, copy, paste, save, stop listening\n")
+
+    # Allow network access for model download if requested
+    if args.download_model:
+        os.environ.pop("HF_HUB_OFFLINE", None)
 
     # Apply CLI args to recorder config
     _cli_config['model'] = args.model
@@ -546,4 +560,5 @@ def main():
 
 
 if __name__ == '__main__':
+    multiprocessing.freeze_support()  # Required for PyInstaller: handle subprocess spawns
     main()
