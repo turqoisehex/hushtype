@@ -3,23 +3,28 @@
 # Build: pyinstaller hushtype.spec
 # Output: dist/hushtype.exe
 
+from PyInstaller.utils.hooks import collect_all, collect_submodules
+
+# Packages that need full collection (data files, submodules, binaries)
+collected = {}
+for pkg in ['RealtimeSTT', 'faster_whisper', 'ctranslate2', 'onnxruntime',
+            'tokenizers', 'huggingface_hub']:
+    datas, binaries, hiddenimports = collect_all(pkg)
+    collected.setdefault('datas', []).extend(datas)
+    collected.setdefault('binaries', []).extend(binaries)
+    collected.setdefault('hiddenimports', []).extend(hiddenimports)
+
 a = Analysis(
     ['hushtype.py'],
     pathex=[],
-    binaries=[],
-    datas=[],
-    hiddenimports=[
-        'RealtimeSTT',
+    binaries=collected.get('binaries', []),
+    datas=collected.get('datas', []),
+    hiddenimports=collected.get('hiddenimports', []) + [
         'pyautogui',
         'pyaudio',
         'win32clipboard',
         'pywintypes',
         'winsound',
-        'faster_whisper',
-        'ctranslate2',
-        'tokenizers',
-        'huggingface_hub',
-        'onnxruntime',
     ],
     hookspath=[],
     hooksconfig={},
