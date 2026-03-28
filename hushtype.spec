@@ -29,7 +29,7 @@ a = Analysis(
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
-    excludes=[],
+    excludes=['webrtcvad'],  # Not used (Silero VAD); its PyInstaller hook is broken
     noarchive=False,
 )
 
