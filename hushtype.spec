@@ -28,8 +28,10 @@ a = Analysis(
     ],
     hookspath=[],
     hooksconfig={},
-    runtime_hooks=[],
-    excludes=['webrtcvad'],  # Not used (Silero VAD); its PyInstaller hook is broken
+    runtime_hooks=['runtime_hook.py'],
+    # Exclude packages RealtimeSTT imports but hushtype doesn't use.
+    # Mocked by runtime_hook.py to satisfy the unconditional top-level imports.
+    excludes=['pvporcupine', 'openwakeword', 'webrtcvad', 'halo'],
     noarchive=False,
 )
 
