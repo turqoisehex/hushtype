@@ -16,6 +16,10 @@ import sys
 import multiprocessing
 import argparse
 
+# Suppress noisy hf_xet warning about optional download accelerator
+import warnings
+warnings.filterwarnings("ignore", message=".*hf_xet.*")
+
 from RealtimeSTT import AudioToTextRecorder
 import pyautogui
 import pyaudio
