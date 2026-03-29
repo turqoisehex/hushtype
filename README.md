@@ -1,5 +1,9 @@
 # hushtype
 
+[![Release](https://img.shields.io/github/v/release/turqoisehex/hushtype)](https://github.com/turqoisehex/hushtype/releases/latest)
+[![License](https://img.shields.io/github/license/turqoisehex/hushtype)](LICENSE)
+[![Stars](https://img.shields.io/github/stars/turqoisehex/hushtype?style=social)](https://github.com/turqoisehex/hushtype)
+
 **Real-time voice dictation for Windows** -- type anywhere with your voice using GPU-accelerated OpenAI Whisper speech-to-text.
 
 hushtype is a system-wide voice typing tool that turns your microphone into a keyboard. Press **Ctrl+Alt+V** to start dictating into any application -- text editors, browsers, terminals, chat apps, IDEs, email. It runs silently in the background with a minimal status indicator and supports 40+ voice commands for editing, navigation, and formatting.
@@ -209,6 +213,12 @@ No. All speech recognition runs locally on your GPU using faster-whisper. No aud
 
 **Q: How do I stop hushtype?**
 Say "stop listening" to pause dictation (press Ctrl+Alt+V to resume). Press Ctrl+C in the terminal window to quit entirely.
+
+## Contributing
+
+Contributions are welcome! This is a side project maintained in spare time, so please be patient with response times.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup and guidelines. Check out issues labeled [`good first issue`](https://github.com/turqoisehex/hushtype/labels/good%20first%20issue) for beginner-friendly tasks.
 
 ## Keywords
 

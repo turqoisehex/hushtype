@@ -9,3 +9,9 @@ build/
 venv/
 .env
 *.exe
+.cc-audit.md
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
