@@ -7,7 +7,7 @@
 | Latest release | Yes |
 | Older releases | No |
 
-Only the latest release on the main branch receives security updates.
+Only the latest release on the master branch receives security updates.
 
 ## Reporting a Vulnerability
 
