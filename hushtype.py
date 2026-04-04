@@ -526,7 +526,7 @@ def create_recorder(input_device_index):
         silero_use_onnx=True,
         post_speech_silence_duration=_cli_config['silence'],
         min_length_of_recording=0.5,
-        early_transcription_on_silence=300,
+        early_transcription_on_silence=800,
         normalize_audio=True,
         spinner=False,
         on_recording_start=on_recording_start,
@@ -639,12 +639,12 @@ def parse_args():
              "turbo (default: turbo)",
     )
     parser.add_argument(
-        "--silence", type=float, default=3.0,
-        help="Seconds of silence before finalizing speech (default: 3.0)",
+        "--silence", type=float, default=2.5,
+        help="Seconds of silence before finalizing speech (default: 2.5)",
     )
     parser.add_argument(
-        "--sensitivity", type=float, default=0.4,
-        help="VAD sensitivity 0.0-1.0, higher = more sensitive (default: 0.4)",
+        "--sensitivity", type=float, default=0.55,
+        help="VAD sensitivity 0.0-1.0, higher = more sensitive (default: 0.55)",
     )
     parser.add_argument(
         "--device",
