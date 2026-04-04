@@ -1,11 +1,10 @@
 """PyInstaller runtime hook — mock unused RealtimeSTT dependencies.
 
-RealtimeSTT imports pvporcupine, openwakeword, webrtcvad, and halo
-unconditionally at module level, even when those features aren't used.
-hushtype uses Silero VAD (not webrtcvad), no wake words (not pvporcupine
-or openwakeword), and no spinner (not halo). Mocking these avoids
-bundling their native binaries and resource files, which break in
-PyInstaller's temp directory structure.
+RealtimeSTT imports pvporcupine, openwakeword, and halo unconditionally
+at module level, even when those features aren't used. hushtype doesn't
+use wake words (pvporcupine, openwakeword) or terminal spinners (halo).
+Mocking these avoids bundling their native binaries and resource files.
+webrtcvad is bundled normally via a custom PyInstaller hook.
 """
 
 import sys
@@ -36,13 +35,8 @@ _oww_model = _mock_module('openwakeword.model', {
 })
 _oww.model = _oww_model
 
-# --- webrtcvad (hushtype uses Silero VAD instead) ---
-_mock_vad_cls = type('Vad', (), {
-    '__init__': lambda self, mode=None: None,
-    'set_mode': lambda self, mode: None,
-    'is_speech': lambda self, buf, sample_rate, length=None: False,
-})
-_mock_module('webrtcvad', {'Vad': _mock_vad_cls})
+# --- webrtcvad is now bundled (custom hook in hooks/ fixes the broken
+# contrib hook).  No mock needed.
 
 # --- halo (terminal spinner — hushtype sets spinner=False) ---
 _mock_halo_cls = type('Halo', (), {

@@ -116,6 +116,9 @@ Options:
   --model MODEL        Whisper model: tiny, base, small, medium, large-v3, turbo (default: turbo)
   --silence SECONDS    Seconds of silence before finalizing speech (default: 2.5)
   --sensitivity VALUE  VAD sensitivity 0.0-1.0, higher = more sensitive (default: 0.55)
+  --device NAME        Preferred mic name substring (e.g. --device ZOOM). Overrides NVIDIA Broadcast.
+  --channel N          Audio channel on multi-channel devices, 1-indexed (default: 1)
+  --verbose            Show detailed debug logging from the speech recognizer
   --offline            Disable all network access (model must already be cached)
   --cache-dir DIR      Custom HuggingFace cache directory for Whisper models
   --version            Show version and exit
@@ -200,7 +203,7 @@ Any NVIDIA GPU with CUDA support. The turbo model uses ~4 GB VRAM. Smaller model
 Yes. The only network request is to download the Whisper model from HuggingFace on first run (~1.5 GB). After that, hushtype runs fully offline. You can use `--offline` to verify no network access occurs.
 
 **Q: Does it work with any microphone?**
-Yes. Any Windows audio input device works. If NVIDIA Broadcast is installed, hushtype automatically uses the Broadcast virtual microphone for AI noise suppression.
+Yes. Any Windows audio input device works, including USB audio interfaces (ZOOM, Focusrite, etc.) with multiple channels. If NVIDIA Broadcast is installed, hushtype automatically uses the Broadcast virtual microphone for AI noise suppression. Use `--device NAME` to select a specific mic, and `--channel N` to pick which input on a multi-channel interface.
 
 **Q: Can I add custom voice commands?**
 Not yet via config file, but the `VOICE_COMMANDS` dictionary in `hushtype.py` is straightforward to edit. Custom command support via config file is planned.

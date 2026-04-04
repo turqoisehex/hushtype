@@ -1,4 +1,6 @@
-RealtimeSTT>=0.3.7
+RealtimeSTT>=0.3.7,<0.4
 pyautogui>=0.9.54
 PyAudio>=0.2.14
 pywin32>=306
+numpy>=1.24
+scipy>=1.10

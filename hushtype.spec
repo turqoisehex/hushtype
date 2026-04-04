@@ -25,13 +25,18 @@ a = Analysis(
         'win32clipboard',
         'pywintypes',
         'winsound',
+        'numpy',
+        'scipy.signal',
+        '_webrtcvad',
+        'webrtcvad',
     ],
-    hookspath=[],
+    hookspath=['hooks'],
     hooksconfig={},
     runtime_hooks=['runtime_hook.py'],
     # Exclude packages RealtimeSTT imports but hushtype doesn't use.
     # Mocked by runtime_hook.py to satisfy the unconditional top-level imports.
-    excludes=['pvporcupine', 'openwakeword', 'webrtcvad', 'halo'],
+    # webrtcvad is NOT excluded — custom hook in hooks/ fixes the broken contrib hook.
+    excludes=['pvporcupine', 'openwakeword', 'halo'],
     noarchive=False,
 )
 
