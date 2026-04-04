@@ -44,7 +44,7 @@ import win32clipboard
 
 pyautogui.FAILSAFE = False
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
 # ---------------------------------------------------------------------------
 # Logging setup -- truncated each session
