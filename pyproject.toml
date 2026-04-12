@@ -33,7 +33,7 @@ classifiers = [
     "Topic :: Accessibility",
 ]
 dependencies = [
-    "RealtimeSTT>=0.3.7",
+    "RealtimeSTT>=0.3.104",
     "pyautogui>=0.9.54",
     "PyAudio>=0.2.14",
     "pywin32>=306",
